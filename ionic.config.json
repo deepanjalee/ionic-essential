@@ -1,0 +1,7 @@
+{
+  "name": " essential-course",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
