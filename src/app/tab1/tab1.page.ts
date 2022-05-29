@@ -12,7 +12,12 @@ export class Tab1Page {
   activityList : Observable<Activity[]>;
 
   constructor(activityService: ActivityService) {
-    this.activityList = activityService.getAllActivity();
+    setTimeout(() => {
+      this.activityList = activityService.getAllActivity();
+
+
+    } , 3000);
+
 
   }
 

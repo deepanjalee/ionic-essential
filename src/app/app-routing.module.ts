@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: 'activity-detail/:activityId',
     loadChildren: () => import('./activity-detail/activity-detail.module').then( m => m.ActivityDetailPageModule)
-  }
+  },
+
 ];
 @NgModule({
   imports: [

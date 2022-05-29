@@ -1,0 +1,12 @@
+<ion-content color="dark">
+
+  <video controls class="activity-video">
+    <source [src]="videoUrl" type="video/mp4">
+  </video>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" >
+    <ion-fab-button (click)="closeModel()" color="danger">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
