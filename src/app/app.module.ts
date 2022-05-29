@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { provideFirebaseApp,  initializeApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +17,9 @@ import { AppComponent } from './app.component';
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule],
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp({ ...environment.firebase })),],
+
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
