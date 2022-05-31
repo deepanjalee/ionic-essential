@@ -28,13 +28,13 @@ export class LoginPage implements OnInit {
 
   login() {
     const loginCredentials: LoginCredential = this.loginFormGroup.value;
-    // this.loginService.login(loginCredentials).then((authData) => {
-    //   console.log(authData);
-    // }
-    // ).catch((error) => {
-    //   console.log("Auth Error  =>" , error);
-    // }
-    // );
+    this.loginService.login(loginCredentials).then((authData) => {
+      console.log(authData);
+    }
+    ).catch((error) => {
+      console.log("Auth Error  =>" , error);
+    }
+    );
 
 
   }
