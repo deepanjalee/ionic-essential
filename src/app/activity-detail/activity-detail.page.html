@@ -94,9 +94,15 @@
     </ion-list>
   </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openModel()">
-      <ion-icon name="play"></ion-icon>
+  <ion-fab vertical="top" horizontal="end" slot="fixed" >
+    <ion-fab-button color="success">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="openModel()" color="warning"><ion-icon name="play" ></ion-icon></ion-fab-button>
+      <ion-fab-button color="medium" ><ion-icon name="share" ></ion-icon></ion-fab-button>
+      <ion-fab-button color="danger" (click)="addToFavoirts()"><ion-icon name="star" ></ion-icon></ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

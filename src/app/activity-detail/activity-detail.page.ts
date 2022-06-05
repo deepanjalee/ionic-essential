@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { ActivityVideoPage } from '../activity-video/activity-video.page';
 import { ActivityService } from '../activity.service';
 import { Activity } from '../types';
+import { Firestore} from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-activity-detail',
@@ -16,6 +18,7 @@ export class ActivityDetailPage implements OnInit {
 
   activityDetail: Observable<Activity>;
   constructor(
+
     private modalController: ModalController,
     activityService: ActivityService,
     activatedRoute: ActivatedRoute
@@ -24,10 +27,6 @@ export class ActivityDetailPage implements OnInit {
       setTimeout(() => {
         this.activityDetail = activityService.getActivity(activityID);
       }, 2000);
-
-      //console.log(this.activityDetail);
-
-
     }
 
   ngOnInit() {
@@ -45,9 +44,12 @@ export class ActivityDetailPage implements OnInit {
 
     return videoModel.present();
   });
+  }
 
-
+  addToFavoirts(){
 
   }
+
+
 
 }
