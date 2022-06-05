@@ -7,5 +7,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card [routerLink]="['/tabs/activity-detail', activity.id]" button
+  *ngFor="let activity of (faviouritList | async)">
+    <img [src]="activity.cropped" alt="flower">
+    <ion-card-header>
+
+      <ion-card-title>{{ activity.name }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
 
 </ion-content>

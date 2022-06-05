@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  faviouritList: Observable<any>;
 
-  constructor() {}
+
+  constructor(
+    private angularFireStore: AngularFirestore,
+    private angularFireAuth: AngularFireAuth,
+  ) {
+
+    //get current user
+    this.angularFireAuth.authState.subscribe(user => {
+      if (user) {
+        const userId = user.uid;
+        this.faviouritList = this.angularFireStore.collection("favorites")
+          .doc(userId).collection("favourites").valueChanges();
+      }
+
+      });
+
+
+
+  }
 
 }

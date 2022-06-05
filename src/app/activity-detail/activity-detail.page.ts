@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { ActivityVideoPage } from '../activity-video/activity-video.page';
 import { ActivityService } from '../activity.service';
 import { Activity } from '../types';
-import { Firestore} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 
 @Component({
   selector: 'app-activity-detail',
@@ -18,6 +19,8 @@ export class ActivityDetailPage implements OnInit {
 
   activityDetail: Observable<Activity>;
   constructor(
+    private angularFireStore: AngularFirestore,
+    private angularFireAuth: AngularFireAuth,
 
     private modalController: ModalController,
     activityService: ActivityService,
@@ -46,10 +49,52 @@ export class ActivityDetailPage implements OnInit {
   });
   }
 
-  addToFavoirts(){
+   addToFavoirts(){
+     //get current user
+      this.angularFireAuth.authState.subscribe(user => {
+        if(user){
 
+          const userId = user.uid;
+
+          this.activityDetail.subscribe(
+            (activity)=> {
+              this.angularFireStore
+                .collection("favorites")
+                .doc(userId)
+                .collection("favorites", (ref)=> {
+                  return ref.where("id", "==", activity.id)
+                })
+                .get()
+                  .subscribe((doc)=> {
+                    if(doc.empty){
+                      this.angularFireStore
+                      .collection("favorites")
+                      .doc(userId)
+                       .collection("favorites")
+                       .add(activity);
+                    }
+                  })
+            }
+          );
+
+
+          // this.activityDetail.subscribe(activity => {
+          //   const activityId = activity.id;
+
+          //   this.angularFireStore.collection('users').doc(userId).collection('favorites').doc(activityId).set({
+          //     activityId: activityId
+          //   });
+          // }
+          // );
+        }
+      }
+      );
+
+
+
+    }
   }
 
 
 
-}
+
